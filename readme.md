@@ -20,20 +20,20 @@ The purpose of these scripts is to re-align the pl/sql scripts that as per direc
 1.	Download from the url. All the file creation will happen in folder [tfs_scripts]
 2.	Create following folders under tfs_scripts : [Schema 1], [Schema 2], [Releases], [z_WIP]. OR
   -	 You can execute script **CreateFolders.ps1** to create a template folder structure. Command : **& ".\CreateFolders.ps1"**
-  -	 and rename the respective schema names
-
+  -	 Rename the respective schema names
+3.	Generate individual scripts using any SQL IDE (sql developer/Toad etc) in \tfs_scripts\z_WIP\[Schema xx]. Save the caller file as [schema1_prefix]_run_template.sql
 
 ![scripts](/Documentation/scripts.png?raw=true)
 
 
-3.	Open **merge1.ps1** and make following modifications
+4.	Open **merge1.ps1** and make following modifications
   -	 Replace [Module1] with your appropriate /Scripts/Releases/Module1 folder
   -	 Replace [tfs_caller_script.sql] with appropriate /Scripts/Releases/Module1/tfs_caller_script.sql script name
   -	 Replace [tfs_caller_script_grants.sql] with appropriate /Scripts/Releases/Module1/tfs_caller_script_grants.sql script name
 
-4.	 Open **main.ps1** and make following modifications
+5.	 Open **main.ps1** and make following modifications
   -	Replace [Schema1], [Schema2] will appropirate Schema name folders
   -	Replace [schema1_prefix], [schema2_prefix] with short 2/3 letter schema name .....all the caller scripts will be prefixed with this name in folder [CallerScipts]
 
-5.	 Execute the script in PowerShell:
+6.	 Execute the script in PowerShell:
 	**& ".\main.ps1"** 
