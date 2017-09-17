@@ -39,7 +39,7 @@ This script will parse the script file \Releases\Module1\module1_tfs.sql and add
 #### Commands and Order of execution in PowerShell:
 
 ```diff
-- & ".\CreateFolders.ps1" 
-- & ".\CreateTFSfolders.ps1" 
-- & ".\ParseTFSscript.ps1"
+& ".\CreateFolders.ps1" 
+& ".\CreateTFSfolders.ps1" 
+& ".\ParseTFSscript.ps1"
 ```
