@@ -10,16 +10,16 @@ Purpose: This script will create folder templates in current directory along wit
 	 - All the Schema folders will be replicated from z_WIP
 #>
 
-remove-item ".\Releases" -Force -Recurse
-remove-item ".\Schema1" -Force -Recurse
-remove-item ".\Schema2" -Force -Recurse
-remove-item ".\z_WIP" -Force -Recurse
+if (Test-Path ".\Releases") { Remove-Item ".\Releases" -Force -Recurse }
+if (Test-Path ".\Schema1") { Remove-Item ".\Schema1" -Force -Recurse }
+if (Test-Path ".\Schema2") { Remove-Item ".\Schema2" -Force -Recurse }
+if (Test-Path ".\z_WIP") { Remove-Item ".\z_WIP" -Force -Recurse }
 
-new-item -Path ".\Releases\" -Name Module1 -ItemType directory
+new-item -Path ".\Releases\" -Name Module1 -ItemType directory | Out-Null
 
-new-item -Path ".\z_WIP\" -Name Schema1 -ItemType directory
-new-item -Path ".\z_WIP\" -Name Schema2 -ItemType directory
-new-item -Path ".\z_WIP\" -Name CallerScripts -ItemType directory
+new-item -Path ".\z_WIP\" -Name Schema1 -ItemType directory | Out-Null
+new-item -Path ".\z_WIP\" -Name Schema2 -ItemType directory | Out-Null
+new-item -Path ".\z_WIP\" -Name CallerScripts -ItemType directory | Out-Null
 
 #==============================================================================
 Add-content -Path ".\z_WIP\CallerScripts\header.sql" @"
@@ -58,6 +58,11 @@ spool off
 #spool off
 #"@
 #==============================================================================
+Add-content -Path ".\z_WIP\Schema1\sh1_grants.sql" @"
+prompt All grants here
+prompt ======================
+"@
+
 Add-content -Path ".\z_WIP\Schema1\sh1_init.sql" @"
 prompt All init1 data here
 prompt ======================
@@ -130,6 +135,11 @@ prompt
 "@
 
 #==============================================================================
+Add-content -Path ".\z_WIP\Schema2\sh2_grants.sql" @"
+prompt All grants here
+prompt ======================
+"@
+
 Add-content -Path ".\z_WIP\Schema2\sh2_init.sql" @"
 prompt All init1 data here
 prompt ======================

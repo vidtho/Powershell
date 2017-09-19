@@ -39,7 +39,7 @@ foreach ($line in $content)
       #echo $line
     }
 
-    if ($line.contains("init.sql")) {
+    if (($line.contains("init.sql")) -Or ($line.contains("INS.sql"))) {
      $init = "@`"..\..\$schema\SQL\"
       $line = $line.replace('@@', $init)
       #echo $line
@@ -51,3 +51,5 @@ foreach ($line in $content)
 
 Remove-Item $tfs_script1 -Force -Recurse
 Rename-Item $tfs_script2 "module1_tfs.sql"
+
+echo "TFS parsed caller script: $tfs_script1"
