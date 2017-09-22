@@ -28,8 +28,9 @@ $local_folder = ".\z_WIP\"
 $tfs_script = ".\Releases\Module1\module1_tfs.sql"
 $tfs_grants = ".\Releases\Module1\module1_tfs_grants.sql"
 if (Test-Path $tfs_script) { Remove-Item $tfs_script -Force -Recurse }
+if (Test-Path $tfs_grants) { Remove-Item $tfs_grants -Force -Recurse }
 Get-Content ".\z_WIP\CallerScripts\header.sql" | Set-Content "$tfs_script"
-
+Add-content -path "$tfs_grants" -value "spool grants.txt"
 # -- End ----------------------------------------------------------------------------------
 
 ##-===========================================
@@ -49,7 +50,7 @@ $schfolder = "$($dir.name)"
         
 	## Create TFS Schema folders
 	New-Item -Path ".\" -Name "$schfolder" -ItemType Directory | Out-Null
-        New-Item -Path ".\$schfolder" -Name "Packages" -ItemType Directory  | Out-Null
+    New-Item -Path ".\$schfolder" -Name "Packages" -ItemType Directory  | Out-Null
 	New-Item -Path ".\$schfolder" -Name "Tables" -ItemType Directory  | Out-Null
 	New-Item -Path ".\$schfolder" -Name "Views" -ItemType Directory  | Out-Null
 	New-Item -Path ".\$schfolder" -Name "SQL" -ItemType Directory | Out-Null
@@ -74,14 +75,12 @@ $schfolder = "$($dir.name)"
 	Get-Content "$fullpath\*run.sql" | Add-Content "$tfs_script"
 
 	# Append *grants.sql to tfs caller scripts
-	Add-content -path "$tfs_grants" -value "spool grants.txt"
 	Add-content -path "$tfs_grants" -value "Prompt #################################"
 	Add-content -path "$tfs_grants" -value "Prompt Scripts for Schema $schfolder"
 	Add-content -path "$tfs_grants" -value "Prompt #################################"
 	Add-content -path "$tfs_grants" -value "Prompt "
 	Get-Content "$fullpath\*grants.sql" | Add-Content "$tfs_grants"
-	Add-content -path "$tfs_grants" -value "spool off"
 }
 
 Get-Content ".\z_WIP\CallerScripts\footer.sql" | Add-Content "$tfs_script"
-
+Add-content -path "$tfs_grants" -value "spool off"
