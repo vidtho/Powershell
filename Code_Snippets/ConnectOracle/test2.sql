@@ -1,0 +1,2 @@
+SELECT COUNT(1) FROM &1;
+exit;
