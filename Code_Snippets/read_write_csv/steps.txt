@@ -1,0 +1,37 @@
+--Same steps for se2 and ovation files
+--copy the nusa as it is from tfs
+
+Gemma has provided the SE2 file Gdb_ca_c_20170930.mth
+
+This file was prepared for processing by the following steps:
+1) Copy file Gdb_ca_c_20170930.mth to axs_se2_external_feed_<iteration_id><pivot_pt><run_id>.txt
+2) Copy a control file from the preexisting quarter to current quarter
+3) Open the new SE2 file in EditPlus
+4) Replace "," with |
+5) Replace |.00 with |0.00
+6) Replace |" with nothing
+6) Replace " with nothing
+7) Replace | 0 with |0
+7a) Delete the trailer record at the bottom of the file.
+8) Save the SE2 File
+9) Check-in the SE2 File to TFS in the location: $/CBIT/Horizontals/Actuarial/ADR/DataFiles/SLR
+10) Open the new control file
+11) Copy all the data from the SE2 txt file into Excel
+12) Calculation the sum controls based on the new data
+13) Compare the column headers against production column headers from adr_stg.axs_column_mapping where src_filename like '%se2%' and end_dt = '31-Dec-9999'
+14) Check-in the control file to the same TFS location as the txt file.
+
+The order of these replace statements is important.
+
+Where are the heasder columns:  $/CBIT/Horizontals/Actuarial/ADR/DataFiles/SLR
+in TFS
+
+
+copy a sample records to excel
+select A (data all in text) -> Data -> 
+	text to columns -> 
+		Delimited -> next -> 
+		other -> | next/finish
+
+
+copy the nusa as it is
